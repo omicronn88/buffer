@@ -1,0 +1,2 @@
+gitlab-runner-linux-amd64 filter=lfs diff=lfs merge=lfs -text
+gitlab-runner_amd64.rpm filter=lfs diff=lfs merge=lfs -text
