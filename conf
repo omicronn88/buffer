@@ -1,0 +1,51 @@
+
+        pages_external_url 'https://pages.test.swordfishsecurity.com'
+        pages_nginx['enable'] = true
+        # Set this flag to enable this feature
+        pages_nginx['redirect_http_to_https'] = true
+        pages_nginx['listen_https'] = false
+
+        gitlab_pages['enable'] = true
+        gitlab_pages['listen_proxy'] = 'localhost:10080'
+        gitlab_pages['access_control'] = false
+        gitlab_pages["namespace_in_path"] = true
+
+        gitlab_rails['object_store']['objects']['pages']['bucket'] = "ahcode-pages"
+        gitlab_rails['pages_local_store_enabled'] = false
+
+        gitlab_rails['pages_object_store_enabled'] = true
+        gitlab_rails['pages_object_store_remote_directory'] = "ahcode-pages"
+        gitlab_rails['pages_object_store_connection'] = {
+          'provider' => 'AWS',
+          'region' => 'RegionOne',
+          'aws_access_key_id' => '<key>',
+          'aws_secret_access_key' => '<token>',
+          'aws_signature_version' => 4,
+          'host' => '<s3 host>',
+          'endpoint' => '<s3 url>',
+          'path_style' => true
+        }
+
+должны быть сертификаты ssl подложены в соответствующую папку, либо задать дополнительно через 
+
+        pages_nginx['ssl_certificate'] = "/etc/gitlab/ssl/fullchain1.pem"
+        pages_nginx['ssl_certificate_key'] = "/etc/gitlab/ssl/privkey1.pem"
+
+
+на нодах sidekiq
+
+        gitlab_rails['object_store']['objects']['pages']['bucket'] = "ahcode-pages"
+        gitlab_rails['pages_local_store_enabled'] = false
+
+        gitlab_rails['pages_object_store_enabled'] = true
+        gitlab_rails['pages_object_store_remote_directory'] = "ahcode-pages"
+        gitlab_rails['pages_object_store_connection'] = {
+          'provider' => 'AWS',
+          'region' => 'RegionOne',
+          'aws_access_key_id' => '<key>',
+          'aws_secret_access_key' => '<token>',
+          'aws_signature_version' => 4,
+          'host' => '<s3 host>',
+          'endpoint' => '<s3 url>',
+          'path_style' => true
+        }
